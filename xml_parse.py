@@ -1,5 +1,9 @@
 import xml.etree.ElementTree as ET
-tree = ET.parse('kisyou.xml')
+import sys
+
+args = sys.argv
+
+tree = ET.parse(args[1])
 root = tree.getroot()
 
 output = []
