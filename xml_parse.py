@@ -13,11 +13,16 @@ for item in root.findall('./{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}
     text = ''
     area_name = item.find('./{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}Area/{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}Name')
     text += '【' + area_name.text + '】'
-    kind_name = item.find('./{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}Kind/{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}Name')
-    if not kind_name is None:
-      text += kind_name.text + '：'
-    kind_status = item.find('./{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}Kind/{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}Status')
-    text += kind_status.text
+    list = []
+    for kind in item.findall('./{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}Kind'):
+      kind_text = ''
+      kind_name = kind.find('./{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}Name')
+      if not kind_name is None:
+        kind_text += kind_name.text + '：'
+      kind_status = kind.find('./{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}Status')
+      kind_text += kind_status.text
+      list.append(kind_text)
+    text += '、'.join(list)
     print(text)
 
 print(output)
