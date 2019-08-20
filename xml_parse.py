@@ -17,8 +17,7 @@ for item in root.findall('./{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}
     for kind in item.findall('./{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}Kind'):
       kind_text = ''
       kind_name = kind.find('./{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}Name')
-      if not kind_name is None:
-        kind_text += kind_name.text + '：'
+      kind_text += kind_name.text + '：'
       kind_status = kind.find('./{http://xml.kishou.go.jp/jmaxml1/body/meteorology1/}Status')
       kind_text += kind_status.text
       list.append(kind_text)
